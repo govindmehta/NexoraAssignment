@@ -1,7 +1,6 @@
 {
   "name": "nexora",
   "homepage": "https://govindmehta.github.io/NexoraAssignment",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {

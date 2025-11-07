@@ -13,16 +13,20 @@ Full-stack shopping cart application built with MERN stack.
 ## Screenshots
 
 ### Product Listing Page
-![Product Listing](screenshots/products.png)
+<img width="1918" height="932" alt="n1" src="https://github.com/user-attachments/assets/d78e0cfd-2c7e-4ada-9aad-e01138cecc91" />
+
 
 ### Shopping Cart
-![Shopping Cart](screenshots/cart.png)
+<img width="1918" height="927" alt="n2" src="https://github.com/user-attachments/assets/84aa8cbb-b214-46f3-b306-edb892f6cb18" />
+
 
 ### Checkout Form
-![Checkout](screenshots/checkout.png)
+<img width="786" height="926" alt="n3" src="https://github.com/user-attachments/assets/0ce2b7a4-99be-4bcf-8c9b-d9ff2d72484f" />
+
 
 ### Order Receipt
-![Receipt](screenshots/receipt.png)
+<img width="937" height="922" alt="n4" src="https://github.com/user-attachments/assets/7e860a08-e141-4197-919f-98f8b82985c3" />
+
 
 ## Tech Stack
 

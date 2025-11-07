@@ -6,9 +6,10 @@ interface CartItemProps {
   onUpdateQuantity: (itemId: string, quantity: number) => void;
   onRemove: (itemId: string) => void;
   loading?: boolean;
+  removing?: boolean;
 }
 
-export const CartItem = ({ item, onUpdateQuantity, onRemove, loading }: CartItemProps) => {
+export const CartItem = ({ item, onUpdateQuantity, onRemove, loading, removing }: CartItemProps) => {
   const handleIncrement = () => {
     onUpdateQuantity(item._id, item.quantity + 1);
   };
@@ -41,8 +42,8 @@ export const CartItem = ({ item, onUpdateQuantity, onRemove, loading }: CartItem
           <div className="flex items-center gap-2 bg-[#FFF2EF] rounded-lg p-1 border border-[#FFDBB6]">
             <button
               onClick={handleDecrement}
-              disabled={loading || item.quantity <= 1}
-              className="p-1 hover:bg-[#FFDBB6] rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              disabled={loading || removing || item.quantity <= 1}
+              className="p-1 hover:bg-[#FFDBB6] rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
               aria-label="Decrease quantity"
             >
               <Minus size={16} />
@@ -54,8 +55,8 @@ export const CartItem = ({ item, onUpdateQuantity, onRemove, loading }: CartItem
             
             <button
               onClick={handleIncrement}
-              disabled={loading}
-              className="p-1 hover:bg-[#FFDBB6] rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              disabled={loading || removing}
+              className="p-1 hover:bg-[#FFDBB6] rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
               aria-label="Increase quantity"
             >
               <Plus size={16} />
@@ -69,11 +70,18 @@ export const CartItem = ({ item, onUpdateQuantity, onRemove, loading }: CartItem
             
             <button
               onClick={() => onRemove(item._id)}
-              disabled={loading}
-              className="p-2 text-[#F7A5A5] hover:bg-red-50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              disabled={loading || removing}
+              className="p-2 text-[#F7A5A5] hover:bg-red-50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer relative"
               aria-label="Remove item"
             >
-              <Trash2 size={18} />
+              {removing ? (
+                <svg className="animate-spin h-[18px] w-[18px] text-[#F7A5A5]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              ) : (
+                <Trash2 size={18} />
+              )}
             </button>
           </div>
         </div>

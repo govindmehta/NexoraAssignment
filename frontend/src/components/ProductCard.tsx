@@ -67,8 +67,8 @@ export const ProductCard = ({ product, onAddToCart, loading }: ProductCardProps)
             <div className="flex items-center border border-[#FFDBB6] rounded-lg overflow-hidden">
               <button
                 onClick={handleDecrement}
-                disabled={quantity <= 1}
-                className="px-3 py-1.5 bg-[#FFF2EF] hover:bg-[#FFDBB6] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                disabled={quantity <= 1 || loading}
+                className="px-3 py-1.5 bg-[#FFF2EF] hover:bg-[#FFDBB6] disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
               >
                 <Minus size={16} />
               </button>
@@ -77,8 +77,8 @@ export const ProductCard = ({ product, onAddToCart, loading }: ProductCardProps)
               </span>
               <button
                 onClick={handleIncrement}
-                disabled={quantity >= product.stock}
-                className="px-3 py-1.5 bg-[#FFF2EF] hover:bg-[#FFDBB6] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                disabled={quantity >= product.stock || loading}
+                className="px-3 py-1.5 bg-[#FFF2EF] hover:bg-[#FFDBB6] disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
               >
                 <Plus size={16} />
               </button>
@@ -89,10 +89,22 @@ export const ProductCard = ({ product, onAddToCart, loading }: ProductCardProps)
         <button
           onClick={handleAddToCart}
           disabled={loading || product.stock === 0}
-          className="w-full bg-[#1A2A4F] hover:bg-opacity-90 disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-2.5 px-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors duration-200"
+          className="w-full bg-[#1A2A4F] hover:bg-opacity-90 disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-2.5 px-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors duration-200 cursor-pointer relative"
         >
-          <ShoppingCart size={18} />
-          {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+          {loading ? (
+            <>
+              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Adding...
+            </>
+          ) : (
+            <>
+              <ShoppingCart size={18} />
+              {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+            </>
+          )}
         </button>
       </div>
     </div>

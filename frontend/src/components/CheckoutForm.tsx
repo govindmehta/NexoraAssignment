@@ -64,7 +64,7 @@ export const CheckoutForm = ({
           <h2 className="text-2xl font-bold text-white">Checkout</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-opacity-80 hover:bg-[#2A3A5F] rounded-lg transition-colors text-white"
+            className="p-2 hover:bg-opacity-80 hover:bg-[#2A3A5F] rounded-lg transition-colors text-white cursor-pointer"
             aria-label="Close"
           >
             <X size={24} />
@@ -140,14 +140,14 @@ export const CheckoutForm = ({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-3 border-2 border-[#FFDBB6] text-[#1A2A4F] rounded-lg font-medium hover:bg-[#FFF2EF] transition-colors"
+              className="flex-1 px-4 py-3 border-2 border-[#FFDBB6] text-[#1A2A4F] rounded-lg font-medium hover:bg-[#FFF2EF] transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 px-4 py-3 bg-[#1A2A4F] text-white rounded-lg font-medium hover:bg-opacity-90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 px-4 py-3 bg-[#1A2A4F] text-white rounded-lg font-medium hover:bg-opacity-90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors cursor-pointer"
             >
               {loading ? "Processing..." : "Place Order"}
             </button>

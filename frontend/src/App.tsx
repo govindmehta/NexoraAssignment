@@ -24,6 +24,8 @@ function App() {
   const [showReceipt, setShowReceipt] = useState(false);
   const [currentOrder, setCurrentOrder] = useState<Order | null>(null);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [addingToCart, setAddingToCart] = useState<string | null>(null);
+  const [removingItem, setRemovingItem] = useState<string | null>(null);
 
   const handleOpenCart = () => {
     setShowCart(true);
@@ -38,7 +40,10 @@ function App() {
   };
 
   const handleAddToCart = async (productId: string, quantity: number = 1) => {
+    if (addingToCart === productId) return; // Prevent multiple clicks
+    
     try {
+      setAddingToCart(productId);
       await addToCart(productId, quantity);
       toast.success(`Added ${quantity} ${quantity === 1 ? 'item' : 'items'} to cart!`, {
         duration: 2000,
@@ -49,6 +54,8 @@ function App() {
         duration: 3000,
         position: 'bottom-right',
       });
+    } finally {
+      setAddingToCart(null);
     }
   };
 
@@ -64,7 +71,10 @@ function App() {
   };
 
   const handleRemoveItem = async (itemId: string) => {
+    if (removingItem === itemId) return; // Prevent multiple clicks
+    
     try {
+      setRemovingItem(itemId);
       await removeItem(itemId);
       toast.success('Item removed from cart', {
         duration: 2000,
@@ -75,6 +85,8 @@ function App() {
         duration: 3000,
         position: 'bottom-right',
       });
+    } finally {
+      setRemovingItem(null);
     }
   };
 
@@ -157,7 +169,7 @@ function App() {
                   key={product._id}
                   product={product}
                   onAddToCart={handleAddToCart}
-                  loading={cartLoading}
+                  loading={addingToCart === product._id}
                 />
               ))}
             </div>
@@ -190,7 +202,7 @@ function App() {
                   </h2>
                   <button
                     onClick={handleCloseCart}
-                    className="text-white hover:bg-opacity-90 hover:bg-[#2A3A5F] p-2 rounded-lg transition-colors"
+                    className="text-white hover:bg-opacity-90 hover:bg-[#2A3A5F] p-2 rounded-lg transition-colors cursor-pointer"
                   >
                     <X size={24} />
                   </button>
@@ -217,6 +229,7 @@ function App() {
                         onUpdateQuantity={handleUpdateQuantity}
                         onRemove={handleRemoveItem}
                         loading={cartLoading}
+                        removing={removingItem === item._id}
                       />
                     ))}
                   </div>
@@ -238,21 +251,21 @@ function App() {
                       handleCloseCart();
                       setTimeout(() => setShowCheckout(true), 300);
                     }}
-                    className="w-full bg-[#1A2A4F] border border-transparent rounded-lg shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-opacity-90 transition-colors"
+                    className="w-full bg-[#1A2A4F] border border-transparent rounded-lg shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-opacity-90 transition-colors cursor-pointer"
                   >
                     Proceed to Checkout
                   </button>
                   <div className="mt-3 flex gap-2">
                     <button
                       onClick={handleCloseCart}
-                      className="flex-1 text-[#1A2A4F] hover:text-opacity-80 font-medium text-sm py-2"
+                      className="flex-1 text-[#1A2A4F] hover:text-opacity-80 font-medium text-sm py-2 cursor-pointer"
                     >
                       Continue Shopping
                     </button>
                     <button
                       onClick={handleClearCart}
                       disabled={cartLoading}
-                      className="flex-1 flex items-center justify-center gap-1 text-[#F7A5A5] hover:text-red-700 hover:bg-red-50 font-medium text-sm py-2 px-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-1 flex items-center justify-center gap-1 text-[#F7A5A5] hover:text-red-700 hover:bg-red-50 font-medium text-sm py-2 px-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                     >
                       <Trash2 size={16} />
                       Clear Cart

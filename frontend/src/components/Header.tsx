@@ -19,7 +19,7 @@ export const Header = ({ cartItemCount, onCartClick }: HeaderProps) => {
           
           <button
             onClick={onCartClick}
-            className="relative bg-[#1A2A4F] hover:bg-opacity-90 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors"
+            className="relative bg-[#1A2A4F] hover:bg-opacity-90 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors cursor-pointer"
           >
             <ShoppingCart size={20} />
             <span className="hidden sm:inline">Cart</span>

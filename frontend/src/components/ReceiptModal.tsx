@@ -14,7 +14,7 @@ export const ReceiptModal = ({ order, onClose }: ReceiptModalProps) => {
           <h2 className="text-2xl font-bold text-white">Order Receipt</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-opacity-80 hover:bg-[#2A3A5F] rounded-lg transition-colors text-white"
+            className="p-2 hover:bg-opacity-80 hover:bg-[#2A3A5F] rounded-lg transition-colors text-white cursor-pointer"
             aria-label="Close"
           >
             <X size={24} />
@@ -114,7 +114,7 @@ export const ReceiptModal = ({ order, onClose }: ReceiptModalProps) => {
           {/* Action Button */}
           <button
             onClick={onClose}
-            className="w-full bg-[#1A2A4F] text-white py-3 hover:cursor-pointer px-4 rounded-lg font-medium hover:bg-opacity-90 transition-colors"
+            className="w-full bg-[#1A2A4F] text-white py-3 px-4 rounded-lg font-medium hover:bg-opacity-90 transition-colors cursor-pointer"
           >
             Continue Shopping
           </button>
